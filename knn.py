@@ -15,8 +15,10 @@ x_test = dftest.drop(columns=["two_year_recid"]).values
 l1 = []
 l2 = []
 linfty = []
-for i in range(1,51):
-    if i==1 or i ==3 or i==5 or i == 10 or i == 20 or i = 30 or i = 40 or i = 50:
+
+# choices_of_k = [1,3,5,10,20,30,40,50]
+choices_of_k1 = [1,3,5]
+for i in choices_of_k1:
         pred = functions.knn(i, "l1", x_train, x_test, y_train)
         accuracy = 1 - np.sum(np.absolute(pred-y_test))/float(len(y_test))
         l1.append(accuracy)
@@ -35,7 +37,8 @@ for i in range(1,51):
 
 # figure1 plot different kinds of KNN
 plt.figure(1)
-divisions = ["k=1","k=3","k=5","k=10","k=15","k=20"]
+# divisions = ["k=1","k=3","k=5","k=10","k=15","k=20"]
+divisions = ["k=1","k=3","k=5"]
 index = np.arange(len(divisions))
 width = 0.2
 
@@ -50,11 +53,14 @@ plt.legend(loc='best')
 
 # figure2 plot the comparison of MLE, naives bayes, and the KNN
 # plt.figure(2)
-# num_training = [1000,2000,3000,4000]
-# plt.plot()
+# num_training = [2000,2500,3000,3500,4167]
+# plt.plot(num_training,mleaccuracy,'g',label = 'MLE')
+# plt.plot(num_training,naive_accuracy,'r',label = 'naive_bayes')
+# plt.plot(num_training,knn_accuracy,'y',label = 'KNN')
 # plt.ylabel("accuracy")
 # plt.xlabel("number of training examples")
 # plt.title("comparison between MLE,naive,and KNN")
 # plt.legend(loc='best')
+# plt.grid(True,color='k')
 plt.show()
 
