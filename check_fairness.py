@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def checkEO(prediction,val,x_test,y_test):
     """
 
@@ -61,18 +62,13 @@ def checkPP(prediction,val,x_test,y_test):
     # print(num_true_positive,num_of_positive)
     ppv = num_true_positive / float(num_of_positive)
 
-
-
     # negative predictive value
     pred_negative_index = np.argwhere(pred[:] == 0)
     num_of_negative = len(pred_negative_index)
     real_case = true_label[pred_negative_index]
     num_true_negative = len(real_case) - np.count_nonzero(real_case)
     npv = num_true_negative / float(num_of_negative)
-    print(ppv,npv)
     return ppv,npv
-
-
 
 
 def checkDP(prediction,val,x_test):

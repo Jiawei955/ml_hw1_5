@@ -64,3 +64,7 @@ def knn(k,norm, x_train, x_test, y_train):
 
     return np.array(res_array)
 
+
+def get_accuracy(pred,y_test):
+    accuracy = 1 - np.sum(np.absolute(pred - y_test)) / float(len(y_test))
+    return accuracy
