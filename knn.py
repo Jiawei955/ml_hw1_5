@@ -14,12 +14,16 @@ y_test = dftest["two_year_recid"].values
 x_test = dftest.drop(columns=["two_year_recid"]).values
 
 
-# knn_accuracy = []
-# training_size = [2000,2250,500,2750,3000,3250,3500,3750,4168]
-# for i in training_size:
-#     prediction = knn_functions.knn(k,norm, x_train, x_test, y_train)
-#     x = knn_functions.get_accuracy(prediction,y_test)
-#     knn_accuracy.append(x)
+knn_accuracy = []
+# training_size = [2000,2250]
+training_size = [2000,2250,2500,2750,3000,3250,3500,3750,4168]
+for i in training_size:
+    prediction = knn_functions.knn(50,"l2", x_train[:i], x_test, y_train[:i])
+    x = knn_functions.get_accuracy(prediction,y_test)
+    knn_accuracy.append(x)
+
+print(knn_accuracy)
+
 
 # check fairness
 # pred = knn_functions.knn(30, "l2", x_train, x_test, y_train)
@@ -30,50 +34,50 @@ x_test = dftest.drop(columns=["two_year_recid"]).values
 
 
 
-l1 = []
-l2 = []
-linfty = []
+# l1 = []
+# l2 = []
+# linfty = []
 
-choices_of_k = [1,3,5,10,20,30,40,50]
-# choices_of_k = [1]
-for i in choices_of_k:
-    pred = knn_functions.knn(i, "l1", x_train, x_test, y_train)
-    accuracy = knn_functions.get_accuracy(pred,y_test)
-    l1.append(accuracy)
-
-    pred = knn_functions.knn(i, "l2", x_train, x_test, y_train)
-    accuracy = knn_functions.get_accuracy(pred, y_test)
-    l2.append(accuracy)
-
-    pred = knn_functions.knn(i, "linfty", x_train, x_test, y_train)
-    accuracy = knn_functions.get_accuracy(pred,y_test)
-    linfty.append(accuracy)
-
-    print("%d is done" % i)
-    # print(accuracy)
-
-
-
-
-
-
-# figure1 plot different kinds of KNN
-plt.figure(1)
-divisions = ["k=1","k=3","k=5","k=10","k=20","k=30","k=40","k=50"]
-index = np.arange(len(divisions))
-width = 0.2
-plt.ylim(0.55,0.7)
-plt.bar(index,l1,width,color='green',label='l1')
-plt.bar(index+width,l2,width,color='red',label='l2')
-plt.bar(index+2*width,linfty,width,color='blue',label='linfty')
-plt.title("knn accuracy with different norms and number of neighbors")
-plt.ylabel("accuracy")
-plt.xlabel("KNNs")
-plt.xticks(index+width, divisions)
-
-
-plt.legend(loc='best')
-
+# choices_of_k = [1,3,5,10,20,30,40,50]
+# # choices_of_k = [1]
+# for i in choices_of_k:
+#     pred = knn_functions.knn(i, "l1", x_train, x_test, y_train)
+#     accuracy = knn_functions.get_accuracy(pred,y_test)
+#     l1.append(accuracy)
+#
+#     pred = knn_functions.knn(i, "l2", x_train, x_test, y_train)
+#     accuracy = knn_functions.get_accuracy(pred, y_test)
+#     l2.append(accuracy)
+#
+#     pred = knn_functions.knn(i, "linfty", x_train, x_test, y_train)
+#     accuracy = knn_functions.get_accuracy(pred,y_test)
+#     linfty.append(accuracy)
+#
+#     print("%d is done" % i)
+#     # print(accuracy)
+#
+#
+#
+#
+#
+#
+# # figure1 plot different kinds of KNN
+# plt.figure(1)
+# divisions = ["k=1","k=3","k=5","k=10","k=20","k=30","k=40","k=50"]
+# index = np.arange(len(divisions))
+# width = 0.2
+# plt.ylim(0.55,0.7)
+# plt.bar(index,l1,width,color='green',label='l1')
+# plt.bar(index+width,l2,width,color='red',label='l2')
+# plt.bar(index+2*width,linfty,width,color='blue',label='linfty')
+# plt.title("knn accuracy with different norms and number of neighbors")
+# plt.ylabel("accuracy")
+# plt.xlabel("KNNs")
+# plt.xticks(index+width, divisions)
+#
+#
+# plt.legend(loc='best')
+#
 
 
 
@@ -90,7 +94,7 @@ plt.legend(loc='best')
 # plt.xlabel("number of training examples")
 # plt.title("comparison between MLE,naive,and KNN")
 # plt.legend(loc='best')
-plt.grid(True,color='k')
-plt.savefig('foo2.png')
-plt.show()
+# plt.grid(True,color='k')
+# plt.savefig('foo2.png')
+# plt.show()
 
